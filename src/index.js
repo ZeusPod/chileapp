@@ -18,7 +18,7 @@ app.use(express.json());
 app.use('/api/v1/items', itemsRouter);
 app.use('/api/v1/biddings', biddingRouter);
 app.use('/api/v1/users', usersRouter);
- app.use('/api/v1/auth', authRouter);
+app.use('/api/v1/auth', authRouter);
 
 
 
@@ -36,6 +36,5 @@ mongosee.connect(
 app.listen(port, () => {
     console.log('Server is running on port: ', port);
 });
-
 
 
