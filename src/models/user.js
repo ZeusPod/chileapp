@@ -74,3 +74,4 @@ userSchema.methods.isCorrectPassword = function (password, callback) {
 };
 
 module.exports = mongo.model("User", userSchema);
+module.exports.bcrypt = bcrypt;
