@@ -5,6 +5,7 @@ const mongo = require('mongoose');
 const biddingSchema = new mongo.Schema({
     code:{
         type: String,
+        required: true
     },
     name: {
         type: String,
@@ -13,6 +14,7 @@ const biddingSchema = new mongo.Schema({
 
     description: {
         type: String,
+        required: true
     },
 
     amount_available: {
@@ -34,9 +36,11 @@ const biddingSchema = new mongo.Schema({
     },
     num_purchases_made:{
         type: Number,
+        required: true
     },
     payments_claims:{
         type: Number,
+        required: true
     },
 
     //relaciones con otros modelos

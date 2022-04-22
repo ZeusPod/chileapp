@@ -11,6 +11,12 @@ const itemsSchema = new mongo.Schema({
     user: [{
         type: mongo.Schema.Types.ObjectId,
         ref: 'User'
+    }],
+    
+    // relacionamos los biddings
+    bidding: [{
+        type: mongo.Schema.Types.ObjectId,
+        ref: 'Bidding'
     }]
 });
 

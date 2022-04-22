@@ -4,7 +4,7 @@ const router = express.Router();
 const item = require("../models/item");
 
 //create item
-router.post("/add_item", (req, res) => {
+router.post("/", (req, res) => {
     const item = itemSchema(req.body);
     item
         .save()
@@ -13,7 +13,7 @@ router.post("/add_item", (req, res) => {
 });
 
 //get all items
-router.get("/get_items", (req, res) => {
+router.get("/", (req, res) => {
     item.find()
         .then((data) => res.json(data))
         .catch((err) => res.status(400).json("Error: " + err));
@@ -21,18 +21,47 @@ router.get("/get_items", (req, res) => {
 
 
 //get item by id
-router.get("/get_item/:id", (req, res) => {
+router.get("/:id", (req, res) => {
     item.findById(req.params.id)
         .then((data) => res.json(data))
         .catch((err) => res.status(400).json("Error: " + err));
 }
 );
 
+router.get("/alluser", (req, res) => 
+{
+    const { items } = req.body
+    let data = [];
+    let error = false;
+    //const response = items.map(id => item.findById(id).populate("bidding").th)
+    for(let i = 0; i < items.length; i++){
+        data.concat(item.findById(items[i]).populate("bidding").then(data => {
+           return data.bidding;
+        })).catch(()=> 
+        {
+            error = true;
+        });
+        if (error)
+        {
+            res.status(400).json("Error: Incomplete information");
+            break;
+        }
+    }
+}
+);
+
+router.get("/populate", (req,res) => {
+    item.find({}).sort({"biddingLenght": -1}).limit(5)
+      .then((data) => res.json(data))
+      .catch((err) => res.status(400).json("Error: " + err));
+         
+});
 //delete item by id
-router.delete("/delete_item/:id", (req, res) => {
-    item.findByIdAndDelete(req.params.id)
+router.delete("/:id", (req, res) => {
+    item.deleteOne({ _id: req.params.id })
         .then((data) => res.json(data))
         .catch((err) => res.status(400).json("Error: " + err));
+        // debemos eliminar las licitacions asociadas a este item
 });
 
 

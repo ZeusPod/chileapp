@@ -3,17 +3,18 @@ const app = express();
 const port = process.env.port || 3000;
 const mongosee = require('mongoose');
 require('dotenv').config();
-const userRouter = require('./routes/usersAuth.js');
 const itemsRouter = require('./routes/items.js');
 const biddingRouter = require('./routes/biddings.js');
-
+const usersRouter = require('./routes/users.js');
+const authRouter = require('./routes/auth.js');
 
 
 //middleware
 app.use(express.json());
-app.use('/api/v1', userRouter);
-app.use('/api/v1', itemsRouter);
-app.use('/api/v1', biddingRouter);
+app.use('/api/v1/items', itemsRouter);
+app.use('/api/v1/biddings', biddingRouter);
+app.use('/api/v1/users', usersRouter);
+app.use('/api/v1/auth', authRouter);
 
 
 

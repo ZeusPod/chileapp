@@ -52,6 +52,17 @@ userSchema.pre('save', function (next) {
     }
 });
 
+
+userSchema.set('toJSON', {
+    transform: function (doc, ret) {
+        ret.id = ret._id;
+        delete ret._id;
+        delete ret.__v;
+        delete ret.password;
+    }
+});
+
+
 userSchema.methods.isCorrectPassword = function (password, callback) {
     bcrypt.compare(password, this.password, function (err, same) {
         if (err) {
