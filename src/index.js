@@ -7,6 +7,10 @@ const itemsRouter = require('./routes/items.js');
 const biddingRouter = require('./routes/biddings.js');
 const usersRouter = require('./routes/users.js');
 const authRouter = require('./routes/auth.js');
+const cors = require("cors");
+
+
+app.use(cors());
 
 
 //middleware
