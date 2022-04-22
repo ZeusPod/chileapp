@@ -38,3 +38,5 @@ app.listen(port, () => {
 });
 
 
+//mirar bien las rutas
+// mirar bien el cors
