@@ -4,7 +4,7 @@ const router = express.Router();
 const user = require("../models/user")
 
 // create a new user
-router.post("/singup", (req, res) => {
+router.post("/signup", (req, res) => {
     const user = userSchema(req.body);
     user
         .save()
@@ -13,7 +13,7 @@ router.post("/singup", (req, res) => {
 });	
 
 // login a user
-router.post("/singin", (req, res) => {
+router.post("/signin", (req, res) => {
     const { email, password } = req.body;
     user.findOne({ email }, (err, user) => {
         if(err){
