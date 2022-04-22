@@ -1,7 +1,7 @@
 const mongo = require('mongoose');
-const bcrypt = require('bcrypt');
+//const bcrypt = require('bcrypt');
 
-const saltRounds = 10;
+//const saltRounds = 10;
 
 
 const userSchema = new mongo.Schema({
@@ -36,7 +36,7 @@ const userSchema = new mongo.Schema({
 });
 
 
-userSchema.pre('save', function (next) {
+/* userSchema.pre('save', function (next) {
     if(this.isNew || this.isModified('password')){
         const document = this;
         bcrypt.hash(document.password, saltRounds, function (err, hashedPassword) {
@@ -50,7 +50,7 @@ userSchema.pre('save', function (next) {
     }else{
         next();
     }
-});
+}); */
 
 
 userSchema.set('toJSON', {
@@ -63,7 +63,7 @@ userSchema.set('toJSON', {
 });
 
 
-userSchema.methods.isCorrectPassword = function (password, callback) {
+/* userSchema.methods.isCorrectPassword = function (password, callback) {
     bcrypt.compare(password, this.password, function (err, same) {
         if (err) {
             callback(err);
@@ -71,7 +71,6 @@ userSchema.methods.isCorrectPassword = function (password, callback) {
             callback(err, same);
         }
     });
-};
+}; */
 
 module.exports = mongo.model("User", userSchema);
-module.exports.bcrypt = bcrypt;

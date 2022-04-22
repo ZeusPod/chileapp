@@ -1,7 +1,7 @@
 const express = require("express");
 const userSchema = require("../models/user");
 const router = express.Router();
-const user = require("../models/user").bcrypt;
+const user = require("../models/user")
 
 // create a new user
 router.post("/singup", (req, res) => {
